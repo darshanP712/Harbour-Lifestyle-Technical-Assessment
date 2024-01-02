@@ -1434,6 +1434,12 @@
       },
       {
         "type": "checkbox",
+        "id": "upsell_cart_drawer",
+        "label": "Enable upsell cart drawer",
+        "default": false
+      },
+      {
+        "type": "checkbox",
         "id": "show_vendor",
         "label": "t:settings_schema.cart.settings.show_vendor.label",
         "default": false

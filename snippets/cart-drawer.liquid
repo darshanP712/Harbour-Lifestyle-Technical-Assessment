@@ -14,6 +14,13 @@
 </style>
 
 <cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}">
+
+    {% comment %} Custom cart upsell start {% endcomment %}
+      {% if settings.upsell_cart_drawer == true %}
+        {%- render 'custom-drawer-upsell' -%}
+      {% endif %}
+    {% comment %} Custom cart upsell end {% endcomment %}  
+
   <div id="CartDrawer" class="cart-drawer">
     <div id="CartDrawer-Overlay" class="cart-drawer__overlay"></div>
     <div

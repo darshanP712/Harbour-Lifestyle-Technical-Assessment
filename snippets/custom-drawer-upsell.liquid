@@ -1,0 +1,77 @@
+{%- liquid
+  assign id = false
+
+  if cart.items.size > 0
+    for line_item in cart.items
+      if forloop.first
+        assign cart_id = line_item.product_id
+        break
+      endif
+    endfor 
+  endif
+-%}
+  
+<cart-upsell-drawer
+    class="group/recommendations cart-upsell-drawer related-products page-width section-cart-recommendations-padding isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+    data-url="{{ routes.product_recommendations_url }}" id="{{ cart_id }}" data-id="7017503981634">
+ 
+  {% if recommendations.performed and recommendations.products_count > 0 %}
+    <h2 class="main-cart-upsell-details-header">
+      You may also like
+    </h2>
+    
+    <ul class="grid product-grid grid--2-col-desktop" role="list" data-recommendations>
+      {% for recommendation in recommendations.products %}
+        <li class="grid__item">
+          {% render 'custom-drawer-upsell-card',
+            card_product: recommendation,
+            media_aspect_ratio: section.settings.image_ratio,
+            image_shape: section.settings.image_shape,
+            show_secondary_image: section.settings.show_secondary_image,
+            show_vendor: section.settings.show_vendor,
+            show_rating: section.settings.show_rating
+          %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</cart-upsell-drawer>
+
+<style>
+  cart-upsell-drawer.cart-upsell-drawer.related-products {
+    overflow-y: scroll;
+    width: 350px;
+    height: 100%;
+    background: white;
+    color: #000;
+    z-index: 1;
+    position: relative;
+    margin: 0;
+  }
+  .main-cart-recommended-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 6px;
+    margin: 12px 0px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .main-cart-upsell-details-header {
+    margin: 14px 0px;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000;
+  }
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  cart-upsell-drawer.cart-upsell-drawer.related-products::-webkit-scrollbar {
+    display: none;
+  }
+  .quick-add-modal[open]{
+    z-index: 9999 !important;
+  }
+  @media screen and (max-width: 1024px) {
+    cart-upsell-drawer.cart-upsell-drawer.related-products{
+      display: none !important;
+    }
+  }
+</style>

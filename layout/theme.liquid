@@ -31,6 +31,13 @@
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+
+    {% comment %} Custom cart drawer upsell start {% endcomment %}
+      {% if settings.upsell_cart_drawer == true %}
+        <script src="{{ 'custom-drawer-upsell.js' | asset_url }}" defer="defer"></script>
+      {% endif %}
+    {% comment %} Custom cart drawer upsell end {% endcomment %}     
+
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
